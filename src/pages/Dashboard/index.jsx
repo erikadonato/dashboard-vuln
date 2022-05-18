@@ -1,31 +1,17 @@
 import SmallCard from '../../components/Card'
-import { CardSpace } from './styles'
 import { Container } from '../../components/Container/styles'
+import { TitleContainer } from '../../components/TitleContainer/styles'
+import { Typography } from '../../components/Typography/styles'
 
 const Dashboard = () => {
     return (
         <Container>
-            <CardSpace>
-                <SmallCard>
-                    teste
-                </SmallCard>
-                <SmallCard>
-                    teste
-                </SmallCard>
-                <SmallCard>
-                    teste
-                </SmallCard>
-                <SmallCard>
-                    teste
-                </SmallCard>
-                <SmallCard>
-                    teste
-                </SmallCard>
-                <SmallCard>
-                    teste
-                </SmallCard>
-            </CardSpace>
-            
+            <TitleContainer>
+                <Typography variant='h4'>
+                    Dashboard de vulnerabilidades
+                </Typography>
+            </TitleContainer>
+            <SmallCard />
         </Container>
     )
 }

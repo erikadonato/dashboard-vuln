@@ -19,16 +19,18 @@ import {
   Form,
   Image,
   Title,
-  Typography,
   WelcomeSession,
   LoginSession
 } from './styles';
+
+import { Typography } from '../Typography/styles';
+import { Navigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const context = useAuth();
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [user, setUser] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [usernameHasError, setUsernameHasError] = useState(false);
   const [passwordHasError, setPasswordHasError] = useState(false);
@@ -46,15 +48,13 @@ const LoginForm = () => {
   const handleLogin = async (e) => {
     e.preventDefault()
 
-    if(!!user) {
+    if(!!username) {
       setUsernameHasError(false);
       if(!!password) {
         setPasswordHasError(false);
-        const isLoggedIn = await context.signIn(user, password);
-        
+        const isLoggedIn = await context.signIn(username, password);
         if(isLoggedIn) {
-          console.log(user)
-          
+          <Navigate to="/dashboard" />
         } else {
           setUsernameHasError(true);
           setPasswordHasError(true);
@@ -87,8 +87,8 @@ const LoginForm = () => {
         <Form onSubmit={handleLogin} flex={4}>
           <TextField
             label="Usuário"
-            value={user}
-            onChange={(e) => setUser(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             error={usernameHasError}
             required={true}
           />

@@ -6,9 +6,15 @@ export const Container = styled.ul`
     list-style: none;
     padding-left: 0;
 
+    @media screen and (max-width: 900px){
+        margin-top: 1.5rem;
+    }
+
     a {
-        color: white;
+        color: #FFF;
+        letter-spacing: 1px;
         text-decoration: none;
+        font-weight: 100;
     }
 
     li {
@@ -20,12 +26,14 @@ export const Container = styled.ul`
         list-style: none;
         line-height: 50px;
         font-size: 16px;
-        font-weight: bold;
         cursor: pointer;
+        letter-spacing: 1px;
+        font-weight: 300;
         padding-left: 5%;
         &:hover {
             color: #11101d;
             background: #fff;
+            font-weight: bold;
             .fas {
                 color: #1d1b31;
             }
@@ -120,7 +128,7 @@ export const Container = styled.ul`
         align-items: center;
         justify-content: center;
         min-width: 50px;
-        margin-top: 10%;
+        margin-top: 0.4rem;
         }
     }
 `

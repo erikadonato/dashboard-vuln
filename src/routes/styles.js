@@ -6,6 +6,7 @@ export const Page = styled.div`
     justify-content: flex-start;
     width: 100%;
     overflow-y: hidden;
+    background: #444444;
 `;
 
 export const DashBoardStyle = styled.div`

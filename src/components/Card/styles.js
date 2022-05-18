@@ -1,12 +1,29 @@
 import styled from 'styled-components'
 
 export const SmallCardContainer = styled.div`
-    width: 80%;
+    border: 1px solid red;
+    width: 30%;
     min-height: 20vh;
-    border: 1px solid black;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-bottom: 2rem;
+    margin: 1rem;
     border-radius: 15px;
+    background: rgba(20, 19, 16, 0.5);
+    color: #FFF;
+
+`
+
+export const CardSpace = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+`
+export const PaginationSpace = styled.div`
+    display: flex; 
+    flex-direction: row;
+    border: 1px solid red;
+    width: 100%;
+    justify-content: center;
+    padding-top: 1rem;
 `

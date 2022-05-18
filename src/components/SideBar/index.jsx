@@ -1,6 +1,6 @@
 import React, {useState, useCallback} from "react";
 import { Container } from './styles'
-import { Typography  } from "../LoginForm/styles";
+import { Typography  } from "../Typography/styles";
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai'
 import LinkList from "../LinkList";
 

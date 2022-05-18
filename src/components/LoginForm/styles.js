@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import MTypography from '@mui/material/Typography';
-
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
@@ -85,6 +83,3 @@ export const Title = styled.div`
   max-height: 20%;
   `;
 
-export const Typography = styled(MTypography)`
-  color: #fff;
-`;

@@ -4,10 +4,9 @@ export const Container = styled.div`
     width: 4rem;
     top: 2rem;
     left: 0;
-    background: rgba(14, 14, 14, 0.75);
+    background: rgba(14, 14, 14, 0.2);
     padding: 0.5rem;
     transition: all 0.5s ease;
-    font-family: 'Roboto', sans-serif;
     border-radius: 0 20px 20px 0;
     min-height: 12vh;
     max-height: 12vh;
@@ -21,18 +20,22 @@ export const Container = styled.div`
     @media screen and (max-width: 800px) {
         width: 3.5rem;
         padding: 2% 0;
+        margin-top: 1rem;
     }
 
     &.active {
         display: block;
-        background: rgba(14, 14, 14, 0.75);
+        background: rgba(14, 14, 14, 0.95);
         width: 16rem;
         border-radius: 0 20px 20px 0;
         padding: 2rem 0;
         min-height: 80vh;
         max-height: 80vh;
         @media screen and (max-width: 800px) {
-          width: 6rem;
+            padding: 1rem 0;
+            width: 6rem;
+            min-height: 80vh;
+            max-height: 80vh;
         }
     }
 
@@ -104,10 +107,6 @@ export const Container = styled.div`
 
         @media screen and (max-width: 800px) {
             transform: translateX(70%);
-        }
-
-        @media screen and (max-width: 500px) {
-            transform: translateX(0);
         }
     }
 

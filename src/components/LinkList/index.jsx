@@ -18,7 +18,7 @@ const LinkList = ({setToogle, toogle}) => {
                     </li>
                 </Tooltip>
             </Link>
-            <Link to="/host-table">
+            <Link to="/host">
                 <Tooltip title="Tabela de Hosts">
                     <li onClick={() => setToogle(!toogle)}>
                         <HiOutlineDesktopComputer className='fas' />
