@@ -8,6 +8,7 @@ import {
   import SideBar from '../components/SideBar';
   import { DashBoardStyle, Page } from './styles';
   import HostPage from '../pages/Hosts';
+import VulnerabilityPage from "../pages/Vulnerability";
 
 const PrivateRoutes = () => {
     return (
@@ -18,6 +19,7 @@ const PrivateRoutes = () => {
                     <Routes>
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/host" element={<HostPage />} />
+                    <Route path="/vulnerability-table" element={<VulnerabilityPage />} />
                     <Route
                         path="*"
                         element={<Navigate to="/dashboard" replace />}

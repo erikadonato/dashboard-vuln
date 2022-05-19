@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import ClipLoader from "react-spinners/ClipLoader";
 import api from '../../services/api';
 
-const TableComponent = () => {
+const HostTable = () => {
 
     const [data, setData] = useState([])
     const [tableHeaders, setTableHeaders] = useState([])
@@ -53,4 +53,4 @@ const TableComponent = () => {
     )
 
 } 
-export default TableComponent
+export default HostTable
