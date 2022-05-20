@@ -9,6 +9,7 @@ import {
   import { DashBoardStyle, Page } from './styles';
   import HostPage from '../pages/Hosts';
 import VulnerabilityPage from "../pages/Vulnerability";
+import HostDetailsPage from "../pages/Hosts Details";
 
 const PrivateRoutes = () => {
     return (
@@ -20,6 +21,7 @@ const PrivateRoutes = () => {
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/host" element={<HostPage />} />
                     <Route path="/vulnerability-table" element={<VulnerabilityPage />} />
+                    <Route path="/host-details" element={<HostDetailsPage />} />
                     <Route
                         path="*"
                         element={<Navigate to="/dashboard" replace />}
