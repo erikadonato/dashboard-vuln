@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -7,9 +7,7 @@ import Select from '@mui/material/Select';
 import { Typography } from '../Typography/styles'
 import Button from '../Button'
 import { makeStyles } from '@material-ui/styles';
-import { toast, ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css';
-import api from '../../services/api';
+import axios from 'axios';
 
 const useStyles = makeStyles({
     root: {
@@ -44,14 +42,32 @@ const useStyles = makeStyles({
 });
 
 const ModalEditHostStatus = ({id, title, modalIsOpen, setIsOpen}) => {
-    const classes = useStyles();
-    const [checked, setChecked] = useState(0)
+  const classes = useStyles();
+  const [checked, setChecked] = useState(0)
+  const [displayMsg, setDisplayMsg] = useState(false)
+  const storagedToken = localStorage.getItem('@App:token');
+  const api = axios.create({
+    baseURL: 'http://201.49.62.134',
+  });
+
+  api.defaults.headers.Authorization = `Token ${storagedToken}`;
 
     function closeModal() {
         setIsOpen(false);
     }
 
-    console.log('aq',modalIsOpen)
+    function handleEdit(){
+      api.patch('/api/vulnerability/274/asset/20/update$', {
+        status: checked
+      })
+      setDisplayMsg(true)
+    }
+
+    useEffect(() => {
+      if(modalIsOpen === false) {
+        setDisplayMsg(false)
+      }
+    }, [modalIsOpen])
 
     return (
         <Modal
@@ -101,20 +117,29 @@ const ModalEditHostStatus = ({id, title, modalIsOpen, setIsOpen}) => {
         <Typography variant='subtitle' style={{marginBottom: '2rem'}}>
             {title}
         </Typography>
-        <FormControl className={classes.root}>
-            <InputLabel id="demo-simple-select-helper-label">Selecione a opção</InputLabel>
-            <Select
-                labelId="demo-simple-select-helper-label"
-                id="demo-simple-select-helper"
-                value={checked}
-                label="Selecione a opção"
-                onChange={(e) => setChecked(e.target.value)}
-            >
-            <MenuItem value={0}>Já foi corrigida</MenuItem>
-            <MenuItem value={1}>Ainda não foi corrigida</MenuItem>
-            </Select>
-            <Button style={{background: '#248f42', marginTop: '2rem'}}>Confirmar</Button>
-        </FormControl>
+        {displayMsg === true ? 
+            <div>Foi alterada para corrigida <br /><br />
+            </div>
+         :
+          <FormControl className={classes.root}>
+              <InputLabel id="demo-simple-select-helper-label">Selecione a opção</InputLabel>
+              <Select
+                  labelId="demo-simple-select-helper-label"
+                  id="demo-simple-select-helper"
+                  value={checked}
+                  label="Selecione a opção"
+                  onChange={(e) => setChecked(e.target.value)}
+              >
+              <MenuItem value={0}>Já foi corrigida</MenuItem>
+              <MenuItem value={1}>Ainda não foi corrigida</MenuItem>
+              </Select>
+              <Button onClick={() => handleEdit()}
+                style={{background: '#248f42', marginTop: '2rem'}}
+              >Confirmar</Button>
+
+
+          </FormControl>
+        }
         </Modal>
     )
 }

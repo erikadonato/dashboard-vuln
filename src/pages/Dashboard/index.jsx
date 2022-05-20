@@ -1,17 +1,17 @@
-import { useState } from 'react'
-import { useEffect } from 'react'
 import { Container } from '../../components/Container/styles'
 import { TitleContainer } from '../../components/TitleContainer/styles'
 import { Typography } from '../../components/Typography/styles'
-import api from '../../services/api'
+import AssetCard from '../../components/VulnerabilityCard/assetCard'
+import { CardSpace, GraphicsArea, GraphicTitle,
+    GraphicArea
+} from './styles'
+import VulnerabilityCard from '../../components/VulnerabilityCard/vulnerabilityCard'
+import RiskCard from '../../components/VulnerabilityCard/riskCard'
+import GraphicSeverity from '../../components/GraphicSeverity'
+import GraphicTopAsset from '../../components/GraphicTopAsset'
 
 const Dashboard = () => {
-    
-    const [data, setData] = useState()
 
-    useEffect(() => {
-        api.get('api/vulnerabilities/?page=2').then( response => setData(response.data))
-    }, [])
 
     return (
         <Container>
@@ -20,6 +20,25 @@ const Dashboard = () => {
                     Dashboard de vulnerabilidades
                 </Typography>
             </TitleContainer>
+            <CardSpace>
+                <AssetCard />
+                <VulnerabilityCard />
+                <RiskCard />
+            </CardSpace>
+            <GraphicsArea>
+                <GraphicArea>
+                <GraphicTitle>
+                    Gráfico de vulnerabilidade de host
+                </GraphicTitle>
+                <GraphicSeverity />
+                </GraphicArea>
+                {/*<GraphicArea>
+                    <GraphicTitle>
+                    Gráfico top Ativos
+                    </GraphicTitle>
+                    <GraphicTopAsset />
+                    </GraphicArea> */}   
+            </GraphicsArea>
         </Container>
     )
 }
