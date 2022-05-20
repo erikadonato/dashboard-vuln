@@ -6,7 +6,6 @@ export const TableContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  border: 1px solid red;
   @media screen and (max-width: 900px){
       min-width: 100%;
   }

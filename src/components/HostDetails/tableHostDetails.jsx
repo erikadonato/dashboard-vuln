@@ -1,8 +1,10 @@
 import { ContainerHost, ContainerTable,
     HeaderHost, TitleHost
  } from "./styles"
+ import { AiOutlineCheck } from 'react-icons/ai'
 import api from '../../services/api' 
 import { useState } from "react";
+import ModalEditHostStatus from "../ModalEditHostStatus";
 
 const TableHostDetails = ({infos}) => {
 
@@ -10,6 +12,9 @@ const TableHostDetails = ({infos}) => {
     const [tableData, setTableData] = useState()
     const [subTableData, setSubTableData] = useState()
     const [tableHeaders] = useState(Object.keys(infos))
+    const [modalIsOpen, setIsOpen] = useState(false)
+    const [id, setId] = useState()
+    const [title, setTitle] = useState()
 
     function getHostDetails(id){
         setTableDisplay(!tableDisplay)
@@ -19,19 +24,9 @@ const TableHostDetails = ({infos}) => {
         })
     }
 
-    function checkSeverity(severity) {
-        if(severity === 'Médio') {
-            return <td style={{background: '#326da8', color: 'white', width: '100%'}}><h1>{severity}</h1></td>
-        } else if(severity === 'Alto'){
-            return <td style={{background: '#c97826'}}><h1>{severity}</h1></td>
-        } else {
-            return <td style={{background: '#e31919'}}><h1>{severity}</h1></td>
-        }
-    }
-
     return (
-        <ContainerHost key={infos.id} onClick={() => getHostDetails(infos.id)}>
-            <HeaderHost>
+        <ContainerHost key={infos.id}>
+            <HeaderHost onClick={() => getHostDetails(infos.id)}>
                 <TitleHost>
                     Id: {infos.id}
                 </TitleHost>
@@ -75,11 +70,6 @@ const TableHostDetails = ({infos}) => {
                                 <td style={{color: '#fff'}}>{tableData.ip_address}</td>
                                 <td style={{color: '#fff'}}>{tableData.risk}</td>
                                 <td style={{color: '#fff'}}>{tableData.vuln_count}</td>
-                                {/*{tableData.lenght > 0 && tableData.map((item) => {
-                                    console.log('')
-                                    return (
-                                    )
-                                })} */}
                                 </tr>    
                                 <tr>
                                     <td colSpan={7}>
@@ -88,16 +78,16 @@ const TableHostDetails = ({infos}) => {
                                 </tr>
                                 <tr>
                                     <th scope="col"><h1>id</h1></th>
-                                    <th scope="col" colSpan={2}><h1>title</h1></th>
+                                    <th scope="col"><h1>title</h1></th>
                                     <th scope="col"><h1>severity</h1></th>
                                     <th scope="col"><h1>cvss</h1></th>
                                     <th scope="col"><h1>publication_date</h1></th>
                                     <th scope="col"><h1>asset_count</h1></th>
+                                    <th scope="col"><h1>marcar como corrigida</h1></th>
                                 </tr>   
                             </>
                            }
                            {subTableData &&  subTableData.map((vuln, index) => {
-                               console.log(vuln.vulnerability)
                                 return (
                                     <tr key={index}>
                                         <td>
@@ -105,7 +95,7 @@ const TableHostDetails = ({infos}) => {
                                                 {vuln.vulnerability.id}
                                             </h1>
                                         </td>
-                                        <td colSpan={2}>
+                                        <td>
                                             <h1>
                                                 {vuln.vulnerability.title}
                                             </h1>
@@ -134,6 +124,17 @@ const TableHostDetails = ({infos}) => {
                                                 {vuln.vulnerability.asset_count}
                                             </h1>
                                         </td>
+                                        <td>
+                                            <h1>
+                                                <AiOutlineCheck style={{cursor: 'pointer'}}
+                                                onClick={() => {
+                                                    setIsOpen(true)
+                                                    setId(vuln.vulnerability.id)
+                                                    setTitle(vuln.vulnerability.title)
+                                                }} 
+                                                />
+                                            </h1>
+                                        </td>
                                     </tr>
                                 )
                             })}
@@ -142,6 +143,10 @@ const TableHostDetails = ({infos}) => {
 
                 </ContainerTable>
             }
+            <ModalEditHostStatus
+                id={id} title={title}
+                modalIsOpen={modalIsOpen} setIsOpen={setIsOpen}
+            />
         </ContainerHost>
     )
 }
